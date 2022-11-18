@@ -1,0 +1,31 @@
+{
+  "name": "junogo-backend",
+  "version": "1.0.0",
+  "description": "Juno Go - Backend",
+  "main": "dist/index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "build": "tsc",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "start:dev": "node src/index.ts",
+    "start:prd": "npm run build && node dist/index.js"
+  },
+  "keywords": [],
+  "author": "Raul Gonzalez",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "16.0.3",
+    "express": "4.18.2",
+    "parse-server": "5.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.9",
+    "@types/parse": "3.0.1",
+    "@typescript-eslint/eslint-plugin": "5.43.0",
+    "@typescript-eslint/parser": "5.43.0",
+    "eslint": "8.27.0",
+    "typescript": "4.9.3",
+    "vitest": "0.25.2"
+  }
+}
