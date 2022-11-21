@@ -4,12 +4,7 @@ const LOGOUT_USER = gql`
 mutation logOut {
   logOut(input: { clientMutationId: "logOut" }) {
     clientMutationId
-    viewer {
-      user {
-        username
-        email
-      }
-    }
+		ok
   }
 }`
 

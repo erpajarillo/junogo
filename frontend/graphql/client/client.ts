@@ -5,7 +5,6 @@ const httpLink = createHttpLink({
     uri: process.env.NEXT_PUBLIC_PARSE_SERVER_URL,
     headers: {
       'X-Parse-Application-Id': process.env.NEXT_PUBLIC_PARSE_SERVER_APP_ID,
-      'X-Parse-Master-Key': process.env.NEXT_PUBLIC_PARSE_SERVER_MASTER_KEY,
       'Content-Type': 'application/json'
     }
 })

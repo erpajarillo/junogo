@@ -24,7 +24,9 @@
         "name": "next"
       }
     ],"paths": {
-        "@graphql/*": ["./graphql/*"]
+        "@Gql/*": ["./graphql/*"],
+        "@Components/*": ["./app/components/*"],
+        "@Pages/*": ["./app/(pages)/*"]
     }
   },
   "include": [

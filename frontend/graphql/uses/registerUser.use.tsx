@@ -1,8 +1,10 @@
 import { useMutation } from '@apollo/client'
-import { REGISTER_USER_MUTATION } from '../../graphql'
+import { REGISTER_USER_MUTATION } from '..'
 
-export const useRegisterUser = (): any[] => {
+const useRegisterUser = (): any[] => {
 	const [registerUser, result] = useMutation(REGISTER_USER_MUTATION)
 
 	return [registerUser, result]
 }
+
+export default useRegisterUser
