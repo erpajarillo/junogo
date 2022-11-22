@@ -25,6 +25,7 @@
       }
     ],"paths": {
         "@App/*": ["./app/*"],
+        "@Public/*": ["./public/*"],
         "@Gql/*": ["./graphql/*"],
         "@Components/*": ["./app/components/*"],
         "@Pages/*": ["./app/(pages)/*"]

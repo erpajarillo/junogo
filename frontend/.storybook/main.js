@@ -25,6 +25,7 @@ module.exports = {
 	webpackFinal: async (config) => {
 		config.resolve.alias = {
       '@App': path.resolve(__dirname, '../app/'),
+      '@Public': path.resolve(__dirname, '../public/'),
 			'@Gql': path.resolve(__dirname, '../graphql/'),
 			'@Components': path.resolve(__dirname, '../app/components/'),
 			'@Pages': path.resolve(__dirname, '../app/(pages)/')

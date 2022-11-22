@@ -17,7 +17,7 @@ const Menu: FC = (): ReactElement => {
     localStorage.removeItem('junoGoToken')
     setUsername('')
     setEmail('')
-    setError('Session Expired')
+    setError('Session Logout')
     setIsLogged(false)
   }
 
@@ -39,7 +39,7 @@ const Menu: FC = (): ReactElement => {
                   type="button"
                   onClick={() => setMenuOpen(!menuOpen)}
                 >
-                  <i className="fas fa-bars"></i>
+                  Menu
                 </button>
               </div>
               <div

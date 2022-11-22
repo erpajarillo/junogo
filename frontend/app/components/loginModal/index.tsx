@@ -20,7 +20,8 @@ const LoginModal: FC = (): ReactElement => {
     const sessionData = result.data?.logIn?.viewer
     const token = sessionData?.sessionToken
     const email = sessionData?.user?.email
-    const error = result.error?.message
+
+    if (result.error?.message) setError(result.error?.message)
 
     if (token) {
       localStorage.setItem('junoGoToken', token)
@@ -29,8 +30,7 @@ const LoginModal: FC = (): ReactElement => {
       setEmail(email)
       setIsLogged(true)
     }
-
-    if (error) setError(error)
+    
     setLoading(result.loading)
   }, [result])
 

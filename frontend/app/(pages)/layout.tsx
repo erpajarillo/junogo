@@ -14,15 +14,16 @@ const PagesLayout = ({ children }: { children: ReactNode }): ReactNode => {
   const session = useSessionUser()
 
   useEffect(() => {
-    setError('')
-    if (session.error?.message) {
-      setError(session.error.message)
-    }
+    const sessionData = session.data?.viewer
+    const token = sessionData?.sessionToken
+    const user = sessionData?.user
 
-    if (!error && session.data?.viewer) {
+    if (session.error?.message) setError(session.error?.message)
+
+    if (!error && token) {
       setIsLogged(true)
-      setUsername(session.data.viewer.user.username)
-      setEmail(session.data.viewer.user.email)
+      setUsername(user.username)
+      setEmail(user.email)
     }
 
     setLoading(session.loading)
