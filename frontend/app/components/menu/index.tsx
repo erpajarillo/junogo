@@ -1,29 +1,22 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import Link from 'next/link';
 import { LoginModal, RegisterModal, Button } from '..'
-import { useLogoutUser, useSessionUser } from '../../../graphql'
+import { useLogoutUser } from '@Gql/index'
+import UserContext from '@App/context'
 
-export default function Menu({ isLogged, setIsLogged }: any) {
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string>('')
+export default function Menu() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [logout, result] = useLogoutUser()
-  const session = useSessionUser()
-
-  useEffect(() => {
-    if (session.error?.message) setError(session.error.message)
-
-    if (!error && session.data?.viewer) setIsLogged(true)
-
-    setLoading(session.loading)
-  }, [session])
+  const { isLogged, setIsLogged, setUsername, loading, setError } = useContext(UserContext)
 
   const _handleLogout = () => {
     logout().catch(e => console.log(e))
+
     localStorage.removeItem('junoGoToken')
     setIsLogged(false)
+    setUsername('')
     setError('Session Expired')
   }
 
@@ -59,10 +52,10 @@ export default function Menu({ isLogged, setIsLogged }: any) {
                   { !loading && !isLogged &&
                     <>
                       <li className="nav-item">
-                        <LoginModal setIsLogged={setIsLogged} />
+                        <LoginModal />
                       </li>
                       <li className="nav-item">
-                        <RegisterModal setIsLogged={setIsLogged} />
+                        <RegisterModal />
                       </li>
                     </>
                   }

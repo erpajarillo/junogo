@@ -1,25 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useSessionUser } from '@Gql/index'
+import { useContext } from 'react'
+import UserContext from '@App/context'
 
 const Main = () => {
-  const { loading: sessionLoading, error, data } = useSessionUser()
-  const [isLogged, setIsLogged] = useState(false)
-  const [loading, setLoading] = useState(true)
-  const [username, setUsername] = useState('')
-
-  useEffect(() => {
-    if (data?.viewer?.sessionToken) {
-      setUsername(data?.viewer?.user?.username)
-      setIsLogged(true)
-    } 
-    if (error) {
-      setIsLogged(false)
-      setUsername('')
-    }
-    setLoading(sessionLoading)
-  }, [data, error, sessionLoading])
+  const { isLogged, username, loading } = useContext(UserContext)
 
   if (loading) return <p className='text-center text-sm m-2'>Loading...</p>
 

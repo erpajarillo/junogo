@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Button, Textbox } from '..'
 import { useLoginUser } from '../../../graphql'
+import UserContext from '@App/context'
 
-const LoginModal = ({ setIsLogged = () => {} }: any) => {
+const LoginModal = () => {
   const [data, setData] = useState()
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
@@ -12,6 +13,7 @@ const LoginModal = ({ setIsLogged = () => {} }: any) => {
   const [password, setPassword] = useState<string>('')
   const [login, result] = useLoginUser()
   const [showModal, setShowModal] = useState(false)
+  const { setIsLogged, setUsername: setLoggedUsername } = useContext(UserContext)
 
   useEffect(() => {
     setError('')
@@ -20,6 +22,7 @@ const LoginModal = ({ setIsLogged = () => {} }: any) => {
       if (result.data.logIn.viewer.sessionToken) {
         localStorage.setItem('junoGoToken', result.data.logIn.viewer.sessionToken)
         setShowModal(false)
+        setLoggedUsername(username)
         setIsLogged(true)
       }
       setData(result.data.logIn)
