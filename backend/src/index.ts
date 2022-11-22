@@ -11,7 +11,21 @@ const parseServer = new ParseServer({
     appId: process.env.PARSE_SERVER_APP_ID,
     fileKey: 'junogo',
     masterKey: process.env.PARSE_SERVER_MASTER_KEY,
-    restApiKey: process.env.PARSE_SERVER_API_KEY
+    restApiKey: process.env.PARSE_SERVER_API_KEY,
+    accountLockout: {
+      duration: 5,
+      threshold: 3,
+      unlockOnPasswordReset: true,
+    },
+    passwordPolicy: {
+      doNotAllowUsername: true,
+      maxPasswordHistory: 1,
+    },
+    allowClientClassCreation: false,
+    readOnlyMasterKey: true,
+    sessionLength: 60 * 60 * 24 * 7,
+    directAccess: true,
+    enforcePrivateUsers: true,
 });
 
 const parseGraphQLServer = new ParseGraphQLServer(

@@ -8,8 +8,7 @@
     "build": "tsc",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "start:dev": "node src/index.ts",
-    "start:prd": "npm run build && node dist/index.js"
+    "start": "npm run build && node dist/index.js"
   },
   "keywords": [],
   "author": "Raul Gonzalez",
