@@ -46,7 +46,7 @@ const RegisterModal: FC = (): ReactElement => {
   const _handleEmail = (event: any) => setEmail(event.target.value)
   const _handleUsername = (event: any) => setUsername(event.target.value)
   const _handlePassword = (event: any) => setPassword(event.target.value)
-  const _handleRegister = () => register({ variables: { username, password, email }}).catch((e: any) => console.log(e))
+  const _handleRegister = () => register({ variables: { username, password, email }}).catch((e: any) => null)
 
   return (
     <>
