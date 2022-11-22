@@ -1,5 +1,5 @@
 import { ApolloProvider } from '@apollo/client'
-import { client } from '../../../graphql'
+import { client } from '@Gql/index'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import Menu from "."
 
@@ -8,7 +8,7 @@ export default {
 	component: Menu,
 } as ComponentMeta<typeof Menu>
 
-const Template: ComponentStory<typeof Menu> = (args) => {
+const Template: ComponentStory<typeof Menu> = (args: any) => {
   return (  
     <ApolloProvider client={client}>
       <Menu {...args} />

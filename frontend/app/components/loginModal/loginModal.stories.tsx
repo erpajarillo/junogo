@@ -1,5 +1,5 @@
 import { ApolloProvider } from '@apollo/client'
-import { client } from '../../../graphql'
+import { client } from '@Gql/index'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import LoginModal from "."
 
@@ -8,7 +8,7 @@ export default {
 	component: LoginModal,
 } as ComponentMeta<typeof LoginModal>
 
-const Template: ComponentStory<typeof LoginModal> = (args) => {
+const Template: ComponentStory<typeof LoginModal> = (args: any) => {
   return (
     <ApolloProvider client={client}>
       <LoginModal {...args} />

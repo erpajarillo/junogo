@@ -1,10 +1,10 @@
 'use client'
 
-import { useContext } from 'react'
+import { useContext, ReactNode } from 'react'
 import UserContext from '@App/context'
 
-const Main = () => {
-  const { isLogged, username, loading } = useContext(UserContext)
+const Main = (): ReactNode => {
+  const { isLogged, email, username, loading } = useContext(UserContext)
 
   if (loading) return <p className='text-center text-sm m-2'>Loading...</p>
 
@@ -26,6 +26,7 @@ const Main = () => {
           <h1 className='text-center text-4xl'>
             { username }, you are logged!
           </h1>
+          <h3 className='text-center text-xl'> Your email is { email }</h3>
         </>
       }
     </>

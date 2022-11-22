@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   "stories": [
     "../app/components/**/*.stories.stories.mdx",
@@ -19,5 +21,14 @@ module.exports = {
   "framework": "@storybook/react",
   "core": {
     "builder": "@storybook/builder-webpack5"
-  }
+  },
+	webpackFinal: async (config) => {
+		config.resolve.alias = {
+      '@App': path.resolve(__dirname, '../app/'),
+			'@Gql': path.resolve(__dirname, '../graphql/'),
+			'@Components': path.resolve(__dirname, '../app/components/'),
+			'@Pages': path.resolve(__dirname, '../app/(pages)/')
+		};
+		return config
+	}
 }

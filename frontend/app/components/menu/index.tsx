@@ -1,23 +1,24 @@
 'use client'
 
-import { useState, useContext } from 'react'
+import { useState, useContext, FC, ReactElement } from 'react'
 import Link from 'next/link';
 import { LoginModal, RegisterModal, Button } from '..'
 import { useLogoutUser } from '@Gql/index'
 import UserContext from '@App/context'
 
-export default function Menu() {
+const Menu: FC = (): ReactElement => {
   const [menuOpen, setMenuOpen] = useState(false)
   const [logout, result] = useLogoutUser()
-  const { isLogged, setIsLogged, setUsername, loading, setError } = useContext(UserContext)
+  const { isLogged, setIsLogged, setEmail, setUsername, loading, setError } = useContext(UserContext)
 
   const _handleLogout = () => {
-    logout().catch(e => console.log(e))
+    logout().catch((e: any) => console.log(e))
 
     localStorage.removeItem('junoGoToken')
-    setIsLogged(false)
     setUsername('')
+    setEmail('')
     setError('Session Expired')
+    setIsLogged(false)
   }
 
   return (
@@ -82,3 +83,5 @@ export default function Menu() {
     </>
   );
 }
+
+export default Menu

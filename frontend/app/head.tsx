@@ -1,4 +1,4 @@
-const Head = async() => {
+const Head = async (): Promise<JSX.Element> => {
   return (
     <>
       <title>Juno Go</title>

@@ -1,12 +1,11 @@
 'use client'
 
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, FC, ReactElement } from 'react'
 import { Button, Textbox } from '..'
 import { useRegisterUser } from '@Gql/index'
 import UserContext from '@App/context'
 
-const RegisterModal = () => {
-  const [data, setData] = useState()
+const RegisterModal: FC = (): ReactElement => {
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
   const [email, setEmail] = useState<string>('')
@@ -14,22 +13,25 @@ const RegisterModal = () => {
   const [password, setPassword] = useState<string>('')
   const [register, result] = useRegisterUser()
   const [showModal, setShowModal] = useState(false)
-  const { setIsLogged, setUsername: setLoggedUsername } = useContext(UserContext)
+  const { setIsLogged, setEmail: setLoggedEmail, setUsername: setLoggedUsername } = useContext(UserContext)
 
   useEffect(() => {
     setError('')
 
-    if (result.data?.signUp) {
-      if (result.data.signUp.viewer.sessionToken) {
-        localStorage.setItem('junoGoToken', result.data.signUp.viewer.sessionToken)
-        setShowModal(false)
-        setLoggedUsername(username)
-        setIsLogged(true)
-      }
-      setData(result.data.signUp)
-    }
-    if (result.error?.message) setError(result.error.message)
+    const sessionData = result.data?.signUp?.viewer
+    const token = sessionData?.sessionToken
+    const email = sessionData?.user?.email
+    const error = result.error?.message
 
+    if (token) {
+      localStorage.setItem('junoGoToken', token)
+      setShowModal(false)
+      setLoggedUsername(username)
+      setLoggedEmail(email)
+      setIsLogged(true)
+    }
+
+    if (error) setError(error)
     setLoading(result.loading)
   }, [result])
 
@@ -38,13 +40,12 @@ const RegisterModal = () => {
     setUsername('')
     setPassword('')
     setError('')
-    setData(undefined)
   }, [showModal])
 
   const _handleEmail = (event: any) => setEmail(event.target.value)
   const _handleUsername = (event: any) => setUsername(event.target.value)
   const _handlePassword = (event: any) => setPassword(event.target.value)
-  const _handleRegister = () => register({ variables: { username, password, email }}).catch(e => console.log(e))
+  const _handleRegister = () => register({ variables: { username, password, email }}).catch((e: any) => console.log(e))
 
   return (
     <>
@@ -74,7 +75,7 @@ const RegisterModal = () => {
                 {/*footer*/}
                 <div className='flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b'>
                   <Button label='Close' type='gray' onClick={() => setShowModal(false)} />
-                  <Button label='Register' type='green' onClick={_handleRegister} />
+                  <Button label='Register' loading={loading} type='green' onClick={_handleRegister} />
                 </div>
               </div>
             </div>

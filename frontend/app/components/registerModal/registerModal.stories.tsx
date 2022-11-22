@@ -1,5 +1,5 @@
 import { ApolloProvider } from '@apollo/client'
-import { client } from '../../../graphql'
+import { client } from '@Gql/index'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import RegisterModal from "."
 
@@ -8,7 +8,7 @@ export default {
 	component: RegisterModal,
 } as ComponentMeta<typeof RegisterModal>
 
-const Template: ComponentStory<typeof RegisterModal> = (args) => {
+const Template: ComponentStory<typeof RegisterModal> = (args: any) => {
   return (
     <ApolloProvider client={client}>
       <RegisterModal {...args} />

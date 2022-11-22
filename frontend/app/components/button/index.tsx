@@ -1,3 +1,5 @@
+import { FC, ReactElement } from 'react'
+
 interface IProps {
   id?: string
   label?: string
@@ -7,7 +9,7 @@ interface IProps {
   onClick?: () => void
 }
 
-const Button: React.FC<IProps> = (
+const Button: FC<IProps> = (
   {
     id = createRandomId(),
     label = '',
@@ -16,7 +18,7 @@ const Button: React.FC<IProps> = (
 		error = false,
     onClick
   }: IProps
-) => {
+): ReactElement => {
 
   let classes = ''
   switch (type) {
@@ -36,7 +38,7 @@ const Button: React.FC<IProps> = (
       classes = 'px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75'
       break
     default:
-      classes = 'bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
+      classes = 'bg-cyan-500 text-white active:bg-cyan-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
   }
 
   return (

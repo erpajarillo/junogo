@@ -3,6 +3,8 @@ import { createContext } from 'react'
 interface IProps {
   isLogged: boolean
   setIsLogged: any
+  email: string
+  setEmail: any
   username: string
   setUsername: any
   loading: boolean

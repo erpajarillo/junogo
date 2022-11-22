@@ -1,34 +1,36 @@
 'use client'
 
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, FC, ReactElement } from 'react'
 import { Button, Textbox } from '..'
-import { useLoginUser } from '../../../graphql'
+import { useLoginUser } from '@Gql/index'
 import UserContext from '@App/context'
 
-const LoginModal = () => {
-  const [data, setData] = useState()
+const LoginModal: FC = (): ReactElement => {
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [login, result] = useLoginUser()
   const [showModal, setShowModal] = useState(false)
-  const { setIsLogged, setUsername: setLoggedUsername } = useContext(UserContext)
+  const { setIsLogged, setEmail, setUsername: setLoggedUsername } = useContext(UserContext)
 
   useEffect(() => {
     setError('')
 
-    if (result.data?.logIn) {
-      if (result.data.logIn.viewer.sessionToken) {
-        localStorage.setItem('junoGoToken', result.data.logIn.viewer.sessionToken)
-        setShowModal(false)
-        setLoggedUsername(username)
-        setIsLogged(true)
-      }
-      setData(result.data.logIn)
-    }
-    if (result.error?.message) setError(result.error.message)
+    const sessionData = result.data?.logIn?.viewer
+    const token = sessionData?.sessionToken
+    const email = sessionData?.user?.email
+    const error = result.error?.message
 
+    if (token) {
+      localStorage.setItem('junoGoToken', token)
+      setShowModal(false)
+      setLoggedUsername(username)
+      setEmail(email)
+      setIsLogged(true)
+    }
+
+    if (error) setError(error)
     setLoading(result.loading)
   }, [result])
 
@@ -36,12 +38,11 @@ const LoginModal = () => {
     setUsername('')
     setPassword('')
     setError('')
-    setData(undefined)
   }, [showModal])
 
   const _handleUsername = (event: any) => setUsername(event.target.value)
   const _handlePassword = (event: any) => setPassword(event.target.value)
-  const _handleLogin = () => login({ variables: { username, password }}).catch(e => console.log(e))
+  const _handleLogin = () => login({ variables: { username, password }}).catch((e: any) => console.log(e))
 
   return (
     <>
@@ -70,7 +71,7 @@ const LoginModal = () => {
                 {/*footer*/}
                 <div className='flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b'>
                   <Button label='Close' type='gray' onClick={() => setShowModal(false)} />
-                  <Button label='Login' type='green' onClick={_handleLogin} />
+                  <Button label='Login' loading={loading} type='green' onClick={_handleLogin} />
                 </div>
               </div>
             </div>

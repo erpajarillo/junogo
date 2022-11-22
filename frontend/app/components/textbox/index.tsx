@@ -1,3 +1,4 @@
+import { FC, ReactElement } from 'react'
 interface IProps {
   id?: string
   type?: string
@@ -9,7 +10,7 @@ interface IProps {
   onChange?: (event: any) => void
 }
 
-const Textbox: React.FC<IProps> = (
+const Textbox: FC<IProps> = (
   {
     id = createRandomId(),
     type = 'text',
@@ -20,7 +21,7 @@ const Textbox: React.FC<IProps> = (
 		error = false,
     onChange
   }: IProps
-) => {
+): ReactElement => {
   return (
   <div className='mb-3 pt-0'>
     <label 
