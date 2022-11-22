@@ -12,7 +12,7 @@ const Menu: FC = (): ReactElement => {
   const { isLogged, setIsLogged, setEmail, setUsername, loading, setError } = useContext(UserContext)
 
   const _handleLogout = () => {
-    logout().catch((e: any) => console.log(e))
+    logout().catch((e: any) => null)
 
     localStorage.removeItem('junoGoToken')
     setUsername('')

@@ -23,7 +23,7 @@ const RegisterModal: FC = (): ReactElement => {
     const email = sessionData?.user?.email
 
     if (result.error?.message) setError(result.error?.message)
-
+    
     if (token) {
       localStorage.setItem('junoGoToken', token)
       setShowModal(false)
@@ -32,6 +32,7 @@ const RegisterModal: FC = (): ReactElement => {
       setIsLogged(true)
     }
 
+    
     setLoading(result.loading)
   }, [result])
 

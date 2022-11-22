@@ -42,7 +42,7 @@ const LoginModal: FC = (): ReactElement => {
 
   const _handleUsername = (event: any) => setUsername(event.target.value)
   const _handlePassword = (event: any) => setPassword(event.target.value)
-  const _handleLogin = () => login({ variables: { username, password }}).catch((e: any) => console.log(e))
+  const _handleLogin = () => login({ variables: { username, password }}).catch((e: any) => null)
 
   return (
     <>
